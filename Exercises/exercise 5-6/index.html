@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+   <title>JSON LOAD EX</title>
+  <script src = "jquery/jquery-3.3.1.min.js"></script>
+   <script>
+   $(document).ready(function(){
+   // let header = $('header');
+   let section = $('section');
+   // let loaded=false;
+
+   $("#getData").click(function(event){
+      $("section").empty();
+     // if(loaded ===false){
+          console.log("clicked");
+          $.getJSON('dropout.json',function(data) {
+          //success
+            //step 1: console.log the result
+            console.log(data);
+            //set boolean to true
+            loaded=true;
+            //step 2: display header on html page
+            // populateHeader(data);
+            //step 3: display the books ....
+            showReasons(data);
+          })
+          //fail
+          .fail(function() {
+            console.log( "error" );
+          });
+
+    });
+
+
+    function showReasons(data){
+    // our array of each book objects
+    let reasons = data['Why'];
+    let searchItem = $("#searchDay").val();
+
+    for (var i = 0; i < reasons.length; i++) {
+        if(searchItem ===reasons[i].Day){
+      let sampleBookArticle = $('<article>');
+      // let sampleBookH2 =('<h1>');
+      let samplePara1 = $("<p>");
+      let samplePara2 = $("<p>");
+      let samplePara3 = $("<p>");
+      let samplePara4 = $("<p>");
+      let samplePara5 = $("<p>");
+
+
+      // $(sampleBookH2).reasons(books[i].reason);
+      $(samplePara1).text(reasons[i].Day);
+      $(samplePara1).text(reasons[i].Reason);
+      $(samplePara2).text(reasons[i].Class);
+      $(samplePara3).text(reasons[i].PlanB);
+      $(samplePara5).text(reasons[i].Res);
+
+
+      // $(sampleBookH2).appendTo(sampleBookArticle);
+      $(samplePara1).appendTo(sampleBookArticle);
+      $(samplePara2).appendTo(sampleBookArticle);
+      $(samplePara3).appendTo(sampleBookArticle);
+      $(samplePara4).appendTo(sampleBookArticle);
+      $(samplePara5).appendTo(sampleBookArticle);
+
+
+      $(section).append(sampleBookArticle);
+    } //books
+  }//function
+  }
+ });
+
+   </script>
+  </head>
+
+  <style>
+
+html {
+  font-family: 'helvetica neue', helvetica, arial, sans-serif;
+}
+
+body {
+  width: 100%;
+}
+/* header styles */
+
+h1 {
+  margin-left:30vw;
+}
+
+
+header p {
+  font-weight: bold;
+  margin-left:30vw;
+}
+section{
+  margin-left:25vw;
+}
+
+/* section styles */
+
+section article {
+  margin-left:2%;
+  margin-right:20%;
+  margin-bottom:2%;
+  background:#b4e4f6;
+  padding:2%;
+}
+
+section p {
+  font-size:1em;
+  font-weight: bold;
+}
+
+section ul {
+  margin-top: 0;
+  font-size:1em;
+}
+
+h2 {
+  font-size: 2.5em;
+  letter-spacing: -5px;
+  margin-bottom: 10px;
+}
+#getData{
+  background:orange;
+  width:100px;
+  margin:2%;
+}
+  </style>
+
+  <body>
+  <input type="text" id="searchDay" value=" Search" />
+  <input type="button" id="getData" value="Submit" />
+      <header>
+
+      </header>
+
+      <section>
+
+      </section>
+
+
+  </body>
+</html>
