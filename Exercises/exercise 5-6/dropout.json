@@ -3,31 +3,27 @@
 "Why":
   [
     {"Day": "Tuesday",
-    "Reason": "Stress level over 9000",
-    "Class": "CART 361",
-    "PlanB": "Male stripper",
-    "Res":"Need money"
+    "Reason": "Reason: Stress level over 9000",
+    "Class": "Class: CART 361",
+    "PlanB": "Plan B: Male stripper"
   },
 
   {"Day": "Wednesday",
-  "Reason": "Not enough sleep",
-  "Class": "CART 360",
-  "PlanB": "Open a taco truck",
-  "Res":"Pride"
+  "Reason": "Reason: Not enough sleep",
+  "Class": "Class: CART 360",
+  "PlanB": "Plan B: Open a taco truck"
       },
 
       {"Day": "Thursday",
-      "Reason": "No motivation",
-      "Class": "DART 453",
-      "PlanB": "Change program",
-      "Res":"Mama raised no quitter"
+      "Reason": "Reason: No motivation",
+      "Class": "Class: DART 453",
+      "PlanB": "Plan B: Change program"
     },
 
     {"Day": "Friday",
-      "Reason": "Cold AF",
-    "Class": "CART 351",
-    "PlanB": "Win lottery",
-    "Res":"CART 351 is good for you"
+    "Reason": "Reason: Cold AF",
+    "Class": "Class: CART 351",
+    "PlanB": "Plan B: Win lottery"
   }
    ]
   }
