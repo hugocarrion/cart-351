@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title> OCTAVE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <script src='p5Lib/p5.min.js'></script>
+
+    <script src='p5Lib/addons/p5.dom.js'></script>
+
+    <script src='p5Lib/addons/p5.sound.js'></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <!-- <script language="javascript" type="text/javascript" src="js/sketch.js"></script> -->
+    <script language="javascript" type="text/javascript" src="js/particle.js"></script>
+    <script>
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+
+         function handle_errors(error)
+         {
+             switch(error.code)
+             {
+                 case error.PERMISSION_DENIED: document.getElementById("status").innerHTML = "you did not share geolocation data";
+                 break;
+
+                 case error.POSITION_UNAVAILABLE: document.getElementById("status").innerHTML = "I could not detect current your position";
+                 break;
+
+                 case error.TIMEOUT: document.getElementById("status").innerHTML = "your browser has timed out";
+                 break;
+
+                 default: document.getElementById("status").innerHTML = "an unknown error has occurred.";
+                 break;
+             }
+         }
+
+
+            success(position);
+        }
+    );
+    </script>
+
+    <script>
+    var map; // Define a global to hold the map object
+    function success(position)
+    {
+         // Define the coordinates as a Google Maps LatLng Object
+         var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+         // Prepare the map options
+         var mapOptions = {
+                        zoom: 20,
+                        center: coords,
+                        mapTypeControl: true,
+                        navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+                        mapTypeId: google.maps.MapTypeId.SATELLITE
+                };
+         // Create the map, and place it in the map_canvas div
+         map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+         // Place the initial marker
+         var marker = new google.maps.Marker({
+                        position: coords,
+                        map: map,
+                        title: "Your current location!"
+                });
+    }
+    </script>
+
+
+  </head>
+  <body>
+    <div id = "wrapper">
+    <h1 style="color: white;">Octave</h1>
+    <p>Record sounds</p>
+
+
+    <div id="controls">
+  	 <button id="recordButton">Record</button>
+  	 <button id="pauseButton" disabled>Pause</button>
+  	 <button id="stopButton" disabled>Stop</button>
+    </div>
+    <div id="formats">Format: start recording to see sample rate</div>
+  	<h3>Recordings</h3>
+  	<ol id="recordingsList"></ol>
+    <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+    <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+    <script src="js/app.js"></script>
+
+
+    <div id="map_canvas"
+    style="
+        width: 600px;
+        height: 400px;
+        border-right:
+        1px solid #666666;
+        border-bottom: 1px solid #666666;
+        border-top: 1px solid #AAAAAA;
+        border-left: 1px solid #AAAAAA;
+        margin: 20px;
+    ">
+  </div>
+    </div>
+    <div id="canvasParticle"></div>
+  </body>
+</html>
