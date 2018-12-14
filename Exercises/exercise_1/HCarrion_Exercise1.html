@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hugo Carrion EXERCISE 1 </title>
+  <style>
+  #c {
+      background-color: #3e181b;
+      border: 3px solid #db1d2d;}
+
+  #d {
+      background-color: #422018;
+      border: 3px solid #f0421c;}
+
+  #e {
+      background-color: #45391b;
+      border: 3px solid #fec02d;}
+
+  body{
+        background:black;}
+
+  .para {color:white;font-size:22pt; background:purple;margin-left: 1%;margin-top: 1%; padding:1%;}
+
+  .box {
+      width: 10vw; /*(1/10th) viewport width */
+      height: 10vw;
+      margin-left: 1%;
+      margin-top: 1%;
+      display:inline-block;
+    }
+
+  .wrapper{
+    margin-left:30%;
+    margin-top:15%;
+  }
+  </style>
+  <script>
+  window.onload = function(){
+    console.log("testing");
+  }
+
+
+    window.onload = function(){
+    let handleClick = function (event){
+    if(event.target.id==="c"){
+    document.getElementById('displayText').innerHTML = "Red";
+    console.log("Red");
+    paragraph.style.display = "inline-block";
+    }
+
+    else if(event.target.id==="d"){
+    document.getElementById('displayText').innerHTML = "Orange";
+    console.log("Orange");
+    paragraph.style.display = "inline-block";
+    }
+
+    else if(event.target.id==="e"){
+    document.getElementById('displayText').innerHTML = "Yellow";
+    console.log("Yellow");
+    paragraph.style.display = "inline-block";
+    }
+
+    else if(event.target.id==="displayText"){
+    paragraph.style.display = "none";
+    }
+};
+
+    // BONUS: Callback functions for mouseover/mouseout
+    let trans = function (event){
+    this.style.opacity = 0.5;
+    }
+
+    let opaque = function (event){
+    this.style.opacity = 1;
+    }
+
+    // Variables Defined
+    let cBox = document.getElementById('c');
+    let dBox = document.getElementById('d');
+    let eBox = document.getElementById('e');
+    let paragraph = document.getElementById('displayText');
+
+    // Event Listeners to Make Boxes Clickable and Paragraph Clickable/Clearable
+    cBox.addEventListener('click', handleClick);
+    dBox.addEventListener('click', handleClick);
+    eBox.addEventListener('click', handleClick);
+    paragraph.addEventListener('click', handleClick);
+
+    // BONUS: Event Listeners for mouseover/mouseout that changes the opacity of the boxes
+    cBox.addEventListener('mouseover', trans);
+    cBox.addEventListener('mouseout', opaque);
+
+    dBox.addEventListener('mouseover', trans);
+    dBox.addEventListener('mouseout', opaque);
+
+    eBox.addEventListener('mouseover', trans);
+    eBox.addEventListener('mouseout', opaque);
+  }
+ </script>
+
+</head>
+<body>
+  <div class = "wrapper">
+  <div id = "c" class = "box"></div>
+  <div id = "d" class = "box"></div>
+  <div id = "e" class = "box"></div>
+  <br />
+  <p style = "display:inline-block;" id = "displayText" class = "para"></p>
+</div>
+
+</body>
+</html>
