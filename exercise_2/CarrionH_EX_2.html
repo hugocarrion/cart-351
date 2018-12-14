@@ -1,0 +1,156 @@
+<html>
+
+<head>
+  <title>Hugo Carrion - Innuendo </title>
+  <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC|Noto+Serif+TC" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #39397F;
+    }
+
+    canvas {
+      background-image: url('images/innuendo2.jpg'); /* initial background image */
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: auto;
+      padding: 0;
+    }
+
+    #testCanvas {margin-top:9em;}
+
+    h1 {
+      text-align: center;
+      margin-top: 1em;
+      color: #B31923;
+      font-family: 'Noto Serif TC', cursive;
+    }
+
+    p{color: #ffffff;
+    text-align: center;
+    font-family: 'Noto Serif SC', sans-serif;}
+
+  </style>
+  <script>
+    /*** THIS EX SHOWS THE BASIC SETUP ****/
+    //only run this once the window loads
+    window.onload = function () {
+      // step 1 access the canvas element && the graphics context....
+      let canvas = document.getElementById('testCanvas');
+      let canvasContext = canvas.getContext('2d');
+
+      // max number ellipses
+      const MAX_ELLIPSES = 300;
+      let numberEllipses = 0; // variable to determine how many ellipses are on screen
+      //array to hold objects
+      let myEllipses = [];
+      let size = [9, 12, 15]; // different sizes
+
+      // NEW :: lets use a timer to stagger the ellipses coming in::
+      // use a timer to offset when the ellipses enter ...
+      let timer = setInterval(putInNewEllipse, 500); // add a snowball every half a second :)
+
+      // instead of immediately filling the array we put items in at a given interval
+      function putInNewEllipse() {
+        console.log(`adding new ellipse:: ${numberEllipses}`);
+
+        if (numberEllipses < MAX_ELLIPSES) {
+          myEllipses.push(new myRunningEllipse(numberEllipses, numberEllipses, size[numberEllipses % size.length], "#2828CA", (numberEllipses % 5) + 1, (numberEllipses % 6) + 3));
+          numberEllipses++;
+        }
+        //clear timer when done
+        else {
+          //stop the timer
+          clearInterval(timer);
+        }
+      }
+
+      requestAnimationFrame(runAni);
+
+      // this is our callback function (to simulate a loop ... )
+      function runAni() {
+        // need to reset the background :)
+        // clear the canvas ...
+        canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+
+        // go through each object and perform required ops
+        //here we only go through for how many objects we have
+        for (let i = 0; i < numberEllipses; i++) {
+          myEllipses[i].update();
+          myEllipses[i].render();
+
+        }
+        // recursive call ...
+        requestAnimationFrame(runAni);
+      }
+
+
+      function myRunningEllipse(x, y, r, c, xSpeed, ySpeed) {
+        //member variables
+        this.xPos = x;
+        this.yPos = y;
+        this.radius = r;
+        this.ellipseColor = c;
+
+        // new for updating
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
+
+        //member function
+        this.render = function () {
+          canvasContext.fillStyle = this.ellipseColor;// change the color we are using
+          canvasContext.beginPath();
+          canvasContext.arc(this.xPos, this.yPos, this.radius, 0, Math.PI * 2, true);
+          canvasContext.fill(); // set the fill
+          canvasContext.closePath(); //close a path ...
+        }
+        //member function for updating
+        this.update = function () {
+          if (this.xPos < 0 || this.xPos > canvas.width) {
+            this.xSpeed *= -1;
+          }
+          if (this.yPos < 0 || this.yPos > canvas.height - 100) {
+            this.ySpeed *= -1;
+          }
+          this.xPos += this.xSpeed;
+          this.yPos += this.ySpeed;
+        }
+
+      } //end myRunningEllipse
+
+
+    // Function call to change background image
+    let light = function (event){
+    this.style.background = "url('images/freddie.jpg')";
+    console.log(`mouseover`);
+    }
+
+    let dark = function (event){
+    this.style.background = "url('images/innuendo2.jpg')";
+    console.log(`mouseout`);
+    }
+
+    // Event Listeners to change background image
+    canvas.addEventListener('mouseover', light);
+    canvas.addEventListener('mouseout', dark);
+
+    }//end window onload
+  </script>
+</head>
+
+<body>
+  <h1>INNUENDO</h1>
+  <canvas id="testCanvas" width="1080" height="720">
+  <img id="imageB" src="images/Snow_Bg_2.jpg"/>
+  </canvas>
+  <p>Based on Queen final album, Innuendo shows a rain of balls falling from the sky as more and more fall creating chaos. When we hover over the screen we can see Freddie Mercury surprised.</p>
+
+</body>
+
+</html>
+<!--Made with Aniesha Sangarapillai   -->
